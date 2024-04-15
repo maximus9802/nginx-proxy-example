@@ -1,0 +1,17 @@
+version: '3.9'
+
+networks:
+  nginx_network:
+    driver: bridge
+
+services:
+  nginx:
+    image: nginx:1.25.1-alpine-slim
+    ports:
+      - 6000:80
+    volumes:
+      - ./config/nginx/templates:/etc/nginx/templates
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - nginx_network
